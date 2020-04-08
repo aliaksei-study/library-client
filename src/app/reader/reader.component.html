@@ -1,0 +1,19 @@
+<h1 class="templateTitle">List of readers</h1>
+<div>
+  <a routerLink="/readers/add" class="href-button-add">Add a reader</a>
+  <button class="small-button">Send an email</button>
+</div>
+<table id="entity-list">
+  <tr>
+    <th></th>
+    <th>Reader's name</th>
+    <th>Reader's surname</th>
+    <th>Title of reading book</th>
+  </tr>
+  <tr *ngFor="let reader of readers">
+    <td><input type="checkbox" value="{{reader.id}}"/> &nbsp;</td>
+    <td>{{reader.name}}</td>
+    <td>{{reader.surname}}</td>
+    <td>{{reader.book.title}}</td>
+  </tr>
+</table>

@@ -1,0 +1,26 @@
+<h1 class="templateTitle">List of books</h1>
+<div>
+  <a routerLink="/books/add" class="href-button-add">Add a book</a>
+  <button class="small-button">Write off the books</button>
+</div>
+<table id="entity-list">
+  <tr>
+    <th></th>
+    <th>Name of the book</th>
+    <th>Publication date</th>
+    <th>Publisher's address</th>
+    <th>Reader's name and surname</th>
+    <th>Action with book</th>
+  </tr>
+  <tr *ngFor="let book of books">
+    <td><input type="checkbox" value="{{book.id}}"/> &nbsp;</td>
+    <td>{{book.title}}</td>
+    <td>{{book.publicationDate}}</td>
+    <td>{{book.publisher.address.city}} {{book.publisher.address.region}}</td>
+    <td>{{book.reader.name}}, {{book.reader.surname}}</td>
+    <td>
+      <a href="#" class="href-button">Выдать</a>
+      <a href="#" class="href-button">Вернуть</a>
+    </td>
+  </tr>
+</table>
