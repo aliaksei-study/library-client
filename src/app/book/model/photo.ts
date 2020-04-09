@@ -1,4 +1,4 @@
-export interface Photo {
+export class Photo {
   id:number;
   urlPhoto:string;
 }

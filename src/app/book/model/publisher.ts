@@ -1,7 +1,7 @@
 import {Country} from "./country.enum";
 import {Address} from "./address";
 
-export interface Publisher {
+export class Publisher {
   id:number;
   country:Country;
   address:Address;

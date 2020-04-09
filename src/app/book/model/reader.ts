@@ -3,7 +3,7 @@ import {User} from "./user";
 import {Photo} from "./photo";
 import {Book} from "./book";
 
-export interface Reader {
+export class Reader {
   id:number;
   name:string;
   surname:string;

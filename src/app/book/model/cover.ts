@@ -1,7 +1,7 @@
 import {Photo} from "./photo";
 import {Book} from "./book";
 
-export interface Cover {
+export class Cover {
     id:number;
     photo:Photo;
     dateOfUpload:Date;

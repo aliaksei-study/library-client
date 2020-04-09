@@ -1,6 +1,6 @@
 import {Gender} from "./gender.enum";
 
-export interface Author {
+export class Author {
   id:number;
   name:string;
   surname:string;
