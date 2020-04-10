@@ -5,6 +5,8 @@ import {Photo} from "../book/model/photo";
 import {Book} from "../book/model/book";
 import {HttpClient} from "@angular/common/http";
 import {Role} from "../book/model/role.enum";
+import {Router} from "@angular/router";
+import {Reader} from "../book/model/reader";
 
 @Component({
   selector: 'app-add-reader',
@@ -13,8 +15,9 @@ import {Role} from "../book/model/role.enum";
 })
 export class AddReaderComponent implements OnInit {
   model:ReaderDto = new ReaderDto();
+  reader:Reader = new Reader();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, public router:Router) { }
 
   ngOnInit(): void {
   }

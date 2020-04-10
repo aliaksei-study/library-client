@@ -10,6 +10,7 @@ import { AddBookComponent } from './add-book/add-book.component';
 import {HttpClientModule} from "@angular/common/http";
 import { AddReaderComponent } from './add-reader/add-reader.component';
 import {FormsModule} from "@angular/forms";
+import {NgxPaginationModule} from "ngx-pagination";
 
 const appRoutes : Routes = [
   {
@@ -32,6 +33,10 @@ const appRoutes : Routes = [
   {
     path:"readers/add",
     component:AddReaderComponent
+  },
+  {
+    path:"readers/edit/:id",
+    component:AddReaderComponent
   }
 ];
 
@@ -48,6 +53,7 @@ const appRoutes : Routes = [
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    NgxPaginationModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [],

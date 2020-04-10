@@ -10,10 +10,11 @@
     <th>Reader's surname</th>
     <th>Title of reading book</th>
   </tr>
-  <tr *ngFor="let reader of readers">
+  <tr *ngFor="let reader of readers | paginate: {itemsPerPage:2, currentPage: p}">
     <td><input type="checkbox" value="{{reader.id}}"/> &nbsp;</td>
-    <td>{{reader.name}}</td>
+    <td><a routerLink="/readers/edit/{{reader.id}}">{{reader.name}}</a></td>
     <td>{{reader.surname}}</td>
     <td>{{reader.book?.title}}</td>
   </tr>
 </table>
+<pagination-controls (pageChange)="p = $event" maxSize="4">p</pagination-controls>

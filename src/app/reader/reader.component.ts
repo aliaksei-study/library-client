@@ -9,6 +9,7 @@ import {ApiService} from "../shared/api.service";
 })
 export class ReaderComponent implements OnInit {
   readers:Reader[] = [];
+  p: number;
 
   constructor(private apiService: ApiService) { }
 

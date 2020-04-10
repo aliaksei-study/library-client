@@ -9,3 +9,7 @@ h5 {
   color: red;
   font-size: 16px;
 }
+
+.invalid-input {
+  color:red;
+}

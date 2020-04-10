@@ -1,24 +1,62 @@
-<h2>Reader creation form</h2>
-<h5>* fields is required</h5>
-<form name="form" #f="ngForm" (submit)="addReader()" novalidate class="">
+<h2 *ngIf="router.url == '/readers/add'; else editReader">Reader creation form</h2>
+<ng-template #editReader><h2>Edit reader form</h2></ng-template>
+<h5>* fields are required</h5>
+<form name="form" #f="ngForm" (submit)="f.form.valid && addReader()">
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="email">Email*</label>
-      <input type="email" class="form-control" id="email" name="email" placeholder="Email" [(ngModel)]="model.userDto.email"/>
+      <input type="email" class="form-control"
+             id="email" name="email"
+             #email="ngModel"
+             [ngClass]="{'is-invalid' : f.submitted && email.invalid}"
+             required email
+             placeholder="Email" [(ngModel)]="model.userDto.email"/>
+      <div *ngIf="f.submitted && email.invalid" class="invalid-input">
+        <div *ngIf="email.errors?.required">Email should exists</div>
+        <div *ngIf="email.errors?.email">Email is not valid email</div>
+      </div>
     </div>
     <div class="form-group col-md-6">
       <label for="inputPassword4">Password*</label>
-      <input type="password" class="form-control" id="inputPassword4" name="password" placeholder="Password" [(ngModel)]="model.userDto.password"/>
+      <input type="password" class="form-control"
+             id="inputPassword4" name="password"
+             placeholder="Password" [(ngModel)]="model.userDto.password"
+             #password="ngModel"
+             [ngClass]="{'is-invalid' : f.submitted && password.invalid}"
+             required minlength="5"
+      />
+      <div *ngIf="f.submitted && password.invalid" class="invalid-input">
+        <div *ngIf="password.errors?.required">Password should exists</div>
+        <div *ngIf="password.errors?.minlength">Password should be at least greater than 5 characters</div>
+      </div>
     </div>
   </div>
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="name">Name*</label>
-      <input type="text" class="form-control" id="name" name="name" placeholder="Name" [(ngModel)]="model.name"/>
+      <input type="text" class="form-control"
+             id="name" name="name"
+             placeholder="Name" [(ngModel)]="model.name"
+             #name="ngModel"
+             [ngClass]="{'is-invalid' : f.submitted && name.invalid}"
+             required
+      />
+      <div *ngIf="f.submitted && name.invalid" class="invalid-input">
+        <div *ngIf="name.errors?.required">Name should exists</div>
+      </div>
     </div>
     <div class="form-group col-md-6">
       <label for="surname">Surname*</label>
-      <input type="text" class="form-control" id="surname" name="surname" placeholder="Surname" [(ngModel)]="model.surname"/>
+      <input type="text" class="form-control"
+             id="surname" name="surname"
+             placeholder="Surname" [(ngModel)]="model.surname"
+             #surname="ngModel"
+             [ngClass]="{'is-invalid' : f.submitted && surname.invalid}"
+             required
+      />
+      <div *ngIf="f.submitted && surname.invalid" class="invalid-input">
+        <div *ngIf="surname.errors?.required">Surname should exists</div>
+      </div>
     </div>
   </div>
   <div class="form-row">
@@ -33,18 +71,22 @@
     <div class="form-group col-md-2">
       <label for="gender">Gender</label>
       <select id="gender" class="form-control" name="gender" [(ngModel)]="model.gender">
-        <option selected>Choose...</option>
         <option value="0">Male</option>
         <option value="1">Female</option>
       </select>
     </div>
     <div class="form-group col-md-2">
       <label for="role">Role*</label>
-      <select id="role" class="form-control" name="role" [(ngModel)]="model.userDto.role">
-        <option selected>Choose...</option>
+      <select id="role" class="form-control" name="role" [(ngModel)]="model.userDto.role"
+              #role="ngModel"
+              [ngClass]="{'is-invalid' : f.submitted && role.invalid}"
+              required>
         <option value="USER">USER</option>
         <option value="ADMIN">ADMIN</option>
       </select>
+      <div *ngIf="f.submitted && role.invalid" class="invalid-input">
+        <div *ngIf="role.errors?.required">Field is required</div>
+      </div>
     </div>
   </div>
   <div class="custom-file">
