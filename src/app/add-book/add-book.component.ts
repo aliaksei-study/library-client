@@ -1,4 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Pipe, PipeTransform} from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+import {Router} from "@angular/router";
+import {BookDto} from "../dto/book-dto";
+import {Genre} from "../book/model/genre.enum";
+import {Country} from "../book/model/country.enum";
+import {Author} from "../book/model/author";
+import {AuthorServiceService} from "../shared/author-service.service";
 
 @Component({
   selector: 'app-add-book',
@@ -6,10 +13,52 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-book.component.css']
 })
 export class AddBookComponent implements OnInit {
+  model:BookDto = new BookDto();
+  genre = Genre;
+  country = Country;
+  keys: string[];
+  keysCountry: string[];
+  authors: Author[];
 
-  constructor() { }
+  constructor(private http: HttpClient, public router:Router, private authorServiceService: AuthorServiceService) {
+    this.keys = Object.keys(this.genre).filter(f => !isNaN(Number(f)));
+    this.keysCountry = Object.keys(this.country).filter(f => !isNaN(Number(f)));
+  }
 
   ngOnInit(): void {
+    this.getAuthors();
+  }
+
+  deleteAuthors() : void {
+
+  }
+
+  addBook() : void {
+    let url = "http://localhost:8080/books/add";
+    this.model.authorDto = this.authors;
+    this.model.coverDto = [];
+    this.http.post(url, this.model).subscribe(
+      res => {
+        location.replace("http://localhost:4200/books");
+      },
+      err => {
+        alert("error");
+      }
+    );
+  }
+
+  public getAuthors() {
+    this.authorServiceService.getAuthors().subscribe(
+      res => {
+        this.authors = res;
+      },
+      err => {
+        alert("error")
+      }
+    )
   }
 
 }
+
+
+

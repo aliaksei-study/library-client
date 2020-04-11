@@ -1,3 +1,111 @@
-<div class="user-form">
-
-</div>
+<h2>Creation book form</h2>
+<h5>* fields are required</h5>
+<form name="form" #f="ngForm" (submit)="f.form.valid && addBook()">
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="title">Title of book*</label>
+      <input type="text" class="form-control"
+             id="title" name="title"
+             #title="ngModel"
+             [ngClass]="{'is-invalid' : f.submitted && title.invalid}"
+             required
+             placeholder="Title of book" [(ngModel)]="model.title"/>
+      <div *ngIf="f.submitted && title.invalid" class="invalid-input">
+        <div *ngIf="title.errors?.required">Field is required</div>
+      </div>
+    </div>
+    <div class="form-group col-md-2">
+      <label for="publicationDate">Publication date*</label>
+      <input type="date" class="form-control"
+             id="publicationDate" name="publicationDate"
+             placeholder="Publicatiob date" [(ngModel)]="model.publicationDate"
+             #publicationDate="ngModel"
+             [ngClass]="{'is-invalid' : f.submitted && publicationDate.invalid}"
+             required minlength="5"
+      />
+      <div *ngIf="f.submitted && publicationDate.invalid" class="invalid-input">
+        <div *ngIf="publicationDate.errors?.required">Field is required</div>
+      </div>
+    </div>
+    <div class="form-group col-md-3">
+      <label for="genre">Genre</label>
+      <select id="genre" class="form-control" name="genre" [(ngModel)]="model.genre">
+          <option *ngFor="let key of keys" value="{{key}}">{{genre[key]}}</option>
+      </select>
+    </div>
+    <div class="form-group col-md-3">
+      <label for="numberOfCopies">Number of copies</label>
+      <input type="number" class="form-control"
+             id="numberOfCopies" name="numberOfCopies"
+             placeholder="Number of copies" [(ngModel)]="model.numberOfCopies"/>
+    </div>
+  </div>
+  <h3>Info about publisher</h3>
+  <div class="form-row">
+    <div class="form-group col-md-3">
+      <label for="country">Country</label>
+      <select id="country" class="form-control" name="country" [(ngModel)]="model.publisherDto.country">
+        <option *ngFor="let key of keysCountry" value="{{key}}">{{country[key]}}</option>
+      </select>
+    </div>
+    <div class="form-group col-md-3">
+      <label for="region">Region</label>
+      <input type="text" class="form-control"
+             id="region" name="region"
+             placeholder="Region" [(ngModel)]="model.publisherDto.addressDto.region"/>
+    </div>
+    <div class="form-group col-md-3">
+      <label for="city">City</label>
+      <input type="text" class="form-control"
+             id="city" name="city"
+             placeholder="City" [(ngModel)]="model.publisherDto.addressDto.city"/>
+    </div>
+    <div class="form-group col-md-3">
+      <label for="street">Street</label>
+      <input type="text" class="form-control"
+             id="street" name="street"
+             placeholder="Street" [(ngModel)]="model.publisherDto.addressDto.street"/>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="numberOfStreet">Number of street</label>
+      <input type="number" class="form-control"
+             id="numberOfStreet" name="region"
+             placeholder="Number of street" [(ngModel)]="model.publisherDto.addressDto.numberOfStreet"/>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="postcode">Postcode</label>
+      <input type="number" class="form-control"
+             id="postcode" name="city"
+             placeholder="Postcode" [(ngModel)]="model.publisherDto.postcode"/>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="email">Email</label>
+      <input type="email" class="form-control"
+             id="email" name="email"
+             placeholder="Email" [(ngModel)]="model.publisherDto.email"/>
+    </div>
+  </div>
+  <h3>Book's authors</h3>
+  <div>
+    <a routerLink="/authors/add" class="href-button-add">Add an author</a>
+    <button class="small-button" (click)="deleteAuthors()">Delete author</button>
+  </div>
+  <table id="entity-list">
+    <tr>
+      <th></th>
+      <th>Name</th>
+      <th>Surname</th>
+      <th>Date of birth</th>
+    </tr>
+    <tr *ngFor="let author of authors">
+      <td><input type="checkbox" value="{{author.id}}"/> &nbsp;</td>
+      <td>{{author?.name}}</td>
+      <td>{{author?.surname}}</td>
+      <td>{{author?.dateOfBirth}}</td>
+    </tr>
+  </table>
+  <button type="submit" class="mt-3 btn btn-primary">Create reader</button>
+  <button type="reset" class="mt-3 btn btn-primary pull-right">Reset form</button>
+</form>

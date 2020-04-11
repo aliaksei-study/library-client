@@ -16,8 +16,8 @@
     <td><input type="checkbox" value="{{book.id}}"/> &nbsp;</td>
     <td>{{book.title}}</td>
     <td>{{book.publicationDate}}</td>
-    <td>{{book.publisher.address.city}} {{book.publisher.address.region}}</td>
-    <td>{{book.reader.name}}, {{book.reader.surname}}</td>
+    <td>{{book.publisher?.address?.city}} {{book.publisher?.address?.region}}</td>
+    <td>{{book.reader?.name}}, {{book.reader?.surname}}</td>
     <td>
       <a href="#" class="href-button">Выдать</a>
       <a href="#" class="href-button">Вернуть</a>

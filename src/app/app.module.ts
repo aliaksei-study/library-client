@@ -11,6 +11,8 @@ import {HttpClientModule} from "@angular/common/http";
 import { AddReaderComponent } from './add-reader/add-reader.component';
 import {FormsModule} from "@angular/forms";
 import {NgxPaginationModule} from "ngx-pagination";
+import { GenresPipe } from './pipe/genres.pipe';
+import { AddAuthorComponent } from './add-author/add-author.component';
 
 const appRoutes : Routes = [
   {
@@ -37,6 +39,10 @@ const appRoutes : Routes = [
   {
     path:"readers/edit/:id",
     component:AddReaderComponent
+  },
+  {
+    path:"authors/add",
+    component:AddAuthorComponent
   }
 ];
 
@@ -47,7 +53,9 @@ const appRoutes : Routes = [
     BookComponent,
     ReaderComponent,
     AddBookComponent,
-    AddReaderComponent
+    AddReaderComponent,
+    GenresPipe,
+    AddAuthorComponent
   ],
   imports: [
     BrowserModule,

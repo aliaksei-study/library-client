@@ -1,12 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {Gender} from "../book/model/gender.enum";
-import {User} from "../book/model/user";
-import {Photo} from "../book/model/photo";
-import {Book} from "../book/model/book";
 import {HttpClient} from "@angular/common/http";
 import {Role} from "../book/model/role.enum";
 import {Router} from "@angular/router";
 import {Reader} from "../book/model/reader";
+import {PhotoDto} from "../dto/photo-dto";
 
 @Component({
   selector: 'app-add-reader',
@@ -29,7 +27,7 @@ export class AddReaderComponent implements OnInit {
         location.replace("http://localhost:4200/readers");
       },
       err => {
-        alert("fucking error");
+        alert("error");
       }
     );
   }
@@ -46,10 +44,6 @@ export class ReaderDto {
   photoDto:PhotoDto = new PhotoDto();
 }
 
-export class PhotoDto {
-  id:number;
-  file:File;
-}
 
 export class UserDto {
   email:string;
