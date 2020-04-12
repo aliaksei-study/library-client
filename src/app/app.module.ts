@@ -13,6 +13,7 @@ import {FormsModule} from "@angular/forms";
 import {NgxPaginationModule} from "ngx-pagination";
 import { GenresPipe } from './pipe/genres.pipe';
 import { AddAuthorComponent } from './add-author/add-author.component';
+import { LoginComponent } from './login/login.component';
 
 const appRoutes : Routes = [
   {
@@ -25,8 +26,12 @@ const appRoutes : Routes = [
   },
   {
     path:"",
-    component: BookComponent,
-    pathMatch:"full"
+    pathMatch:"full",
+    redirectTo:"login"
+  },
+  {
+    path:"login",
+    component:LoginComponent
   },
   {
     path:"books/add",
@@ -55,7 +60,8 @@ const appRoutes : Routes = [
     AddBookComponent,
     AddReaderComponent,
     GenresPipe,
-    AddAuthorComponent
+    AddAuthorComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
