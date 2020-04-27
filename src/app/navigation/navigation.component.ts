@@ -15,4 +15,9 @@ export class NavigationComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  logout(): void {
+    localStorage.clear();
+    alert("you successfully logged out");
+  }
 }

@@ -7,13 +7,14 @@ import { BookComponent } from './book/book.component';
 import { ReaderComponent } from './reader/reader.component';
 import {Router, RouterModule, Routes} from "@angular/router";
 import { AddBookComponent } from './add-book/add-book.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { AddReaderComponent } from './add-reader/add-reader.component';
 import {FormsModule} from "@angular/forms";
 import {NgxPaginationModule} from "ngx-pagination";
 import { GenresPipe } from './pipe/genres.pipe';
 import { AddAuthorComponent } from './add-author/add-author.component';
 import { LoginComponent } from './login/login.component';
+import {AuthenticationInterceptor} from "./interceptor/authentication-interceptor";
 
 const appRoutes : Routes = [
   {
@@ -70,7 +71,13 @@ const appRoutes : Routes = [
     NgxPaginationModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthenticationInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

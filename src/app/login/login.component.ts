@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {User} from "../book/model/user";
 
 @Component({
   selector: 'app-login',
@@ -9,32 +10,25 @@ import {Observable} from "rxjs";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  model:any = {};
+  user: User = new User();
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private http: HttpClient) { }
 
   ngOnInit(): void {
-    sessionStorage.setItem('token', '');
   }
 
   login() {
+    localStorage.setItem('email', `${this.user.email}`);
+    localStorage.setItem('password', `${this.user.password}`)
     let url = 'http://localhost:8080/login';
-    let result = this.http.post<Observable<boolean>>(url, {
-      email: this.model.email,
-      password: this.model.password
-    }).subscribe(isValid => {
-      if (isValid) {
-        sessionStorage.setItem(
-          'token',
-          btoa(this.model.email + ':' + this.model.password)
-        );
-        this.router.navigate(['/books']);
-      } else {
-        alert("Authentication failed.")
+    let result = this.http.get(url).subscribe(
+      data => {
+        console.log(data);
       }
-    });
+    );
+    this.router.navigate(['/books']);
   }
 
 }
