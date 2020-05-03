@@ -1,8 +1,8 @@
-import {Publisher} from "../book/model/publisher";
-import {Genre} from "../book/model/genre.enum";
-import {Reader} from "../book/model/reader";
-import {Author} from "../book/model/author";
-import {Cover} from "../book/model/cover";
+import {Publisher} from "../model/publisher";
+import {Genre} from "../model/genre.enum";
+import {Reader} from "../model/reader";
+import {Author} from "../model/author";
+import {Cover} from "../model/cover";
 import {CoverDto} from "./cover-dto";
 import {PublisherDto} from "./publisher-dto";
 

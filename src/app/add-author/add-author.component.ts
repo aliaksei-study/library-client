@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AddBookComponent} from "../add-book/add-book.component";
-import {AuthorServiceService} from "../shared/author-service.service";
-import {Author} from "../book/model/author";
+import {AuthorService} from "../service/author.service";
+import {Author} from "../model/author";
 
 @Component({
   selector: 'app-add-author',
@@ -10,7 +10,7 @@ import {Author} from "../book/model/author";
 })
 export class AddAuthorComponent implements OnInit {
   model:Author = new Author();
-  constructor(private authorServiceService: AuthorServiceService) { }
+  constructor(private authorServiceService: AuthorService) { }
 
   ngOnInit(): void {
   }

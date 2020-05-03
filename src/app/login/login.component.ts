@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {User} from "../book/model/user";
+import {User} from "../model/user";
 
 @Component({
   selector: 'app-login',
@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
     let url = 'http://localhost:8080/login';
     let result = this.http.get(url).subscribe(
       data => {
-        console.log(data);
+
       }
     );
     this.router.navigate(['/books']);

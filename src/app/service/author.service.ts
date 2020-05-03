@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import {Author} from "../book/model/author";
+import {Author} from "../model/author";
 import {Observable} from "rxjs";
-import {Book} from "../book/model/book";
+import {Book} from "../model/book";
 import {HttpClient} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthorServiceService {
+export class AuthorService {
   private BASE_URL = "http://localhost:8080";
   private ALL_AUTHORS_FROM_LIST_URL = `${this.BASE_URL}\\authors\\allAuthors`;
   private ADD_AUTHOR_TO_LIST_URL = `${this.BASE_URL}\\authors\\add`;

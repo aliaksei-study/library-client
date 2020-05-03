@@ -39,10 +39,12 @@
              placeholder="Name" [(ngModel)]="model.name"
              #name="ngModel"
              [ngClass]="{'is-invalid' : f.submitted && name.invalid}"
+             pattern="^[A-Z][a-z]+"
              required
       />
       <div *ngIf="f.submitted && name.invalid" class="invalid-input">
         <div *ngIf="name.errors?.required">Name should exists</div>
+        <div *ngIf="name.errors?.pattern">Invalid name (should contains at least 2 characters and first letter in upper case)</div>
       </div>
     </div>
     <div class="form-group col-md-6">
@@ -52,10 +54,12 @@
              placeholder="Surname" [(ngModel)]="model.surname"
              #surname="ngModel"
              [ngClass]="{'is-invalid' : f.submitted && surname.invalid}"
+             pattern="^[A-Z][a-z]+"
              required
       />
       <div *ngIf="f.submitted && surname.invalid" class="invalid-input">
         <div *ngIf="surname.errors?.required">Surname should exists</div>
+        <div *ngIf="surname.errors?.pattern">Invalid surname (should contains at least 2 characters and first letter in upper case)</div>
       </div>
     </div>
   </div>
@@ -90,8 +94,13 @@
     </div>
   </div>
   <div class="custom-file">
-    <input type="file" class="custom-file-input" id="file" name="file" [(ngModel)]="model.photoDto.file">
+    <input type="file" class="custom-file-input" id="file" name="file" [(ngModel)]="model.photoDto.file"
+           #file="ngModel"
+           [ngClass]="{'is-invalid' : f.submitted && validateFileExtension(file)}">
     <label class="custom-file-label" for="file">Choose file</label>
+    <div *ngIf="f.submitted && validateFileExtension(file)" class="invalid-input">
+      <div>File format is invalid (exceptable formats: .png, .jpg, .jpeg)</div>
+    </div>
   </div>
   <button type="submit" class="mt-3 btn btn-primary">Create reader</button>
   <button type="reset" class="mt-3 btn btn-primary pull-right">Reset form</button>

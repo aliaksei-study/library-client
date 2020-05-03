@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {Gender} from "../book/model/gender.enum";
 import {HttpClient} from "@angular/common/http";
-import {Role} from "../book/model/role.enum";
 import {Router} from "@angular/router";
-import {Reader} from "../book/model/reader";
-import {PhotoDto} from "../dto/photo-dto";
+import {Reader} from "../model/reader";
+import {ReaderService} from "../service/reader.service";
+import {ReaderDto} from "../dto/reader-dto";
+import {NgModel} from "@angular/forms";
 
 @Component({
   selector: 'app-add-reader',
@@ -15,38 +15,27 @@ export class AddReaderComponent implements OnInit {
   model:ReaderDto = new ReaderDto();
   reader:Reader = new Reader();
 
-  constructor(private http: HttpClient, public router:Router) { }
+  constructor(private http: HttpClient, public router:Router, private readerService: ReaderService) { }
 
   ngOnInit(): void {
   }
 
+  validateFileExtension(file: NgModel) : boolean{
+    if(file.value === undefined) {
+      return false;
+    } else {
+      return !((file.value.endsWith("png")) || (file.value.endsWith("jpeg")) || (file.value.endsWith("jpg")));
+    }
+  }
+
   addReader() : void {
-    let url = "http://localhost:8080/readers/add";
-    this.http.post(url, this.model).subscribe(
-      res => {
-        location.replace("http://localhost:4200/readers");
+    this.readerService.addAuthor(this.model).subscribe(
+      () => {
+        this.router.navigate(['/login']);
       },
       err => {
-        alert("error");
+        console.log(err);
       }
     );
   }
-}
-
-export class ReaderDto {
-  id:number;
-  name:string;
-  surname:string;
-  dateOfBirth:Date;
-  gender:Gender;
-  userDto:UserDto = new UserDto();
-  phone:String;
-  photoDto:PhotoDto = new PhotoDto();
-}
-
-
-export class UserDto {
-  email:string;
-  password:string;
-  role:Role;
 }

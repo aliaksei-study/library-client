@@ -1,5 +1,5 @@
-import {Country} from "../book/model/country.enum";
-import {Address} from "../book/model/address";
+import {Country} from "../model/country.enum";
+import {Address} from "../model/address";
 
 export class PublisherDto {
   id:number;

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {Reader} from "../book/model/reader";
-import {ApiService} from "../shared/api.service";
+import {Component, OnInit} from '@angular/core';
+import {Reader} from "../model/reader";
+import {ReaderService} from "../service/reader.service";
 
 @Component({
   selector: 'app-reader',
@@ -8,17 +8,18 @@ import {ApiService} from "../shared/api.service";
   styleUrls: ['./reader.component.css']
 })
 export class ReaderComponent implements OnInit {
-  readers:Reader[] = [];
+  readers: Reader[] = [];
   p: number;
 
-  constructor(private apiService: ApiService) { }
+  constructor(private readerService: ReaderService) {
+  }
 
   ngOnInit(): void {
     this.getAllReaders();
   }
 
   public getAllReaders() {
-    this.apiService.getAllReaders().subscribe(
+    this.readerService.getAllReaders().subscribe(
       res => {
         this.readers = res;
       },

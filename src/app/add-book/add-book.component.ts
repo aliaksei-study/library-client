@@ -2,10 +2,10 @@ import {Component, OnInit, Pipe, PipeTransform} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {BookDto} from "../dto/book-dto";
-import {Genre} from "../book/model/genre.enum";
-import {Country} from "../book/model/country.enum";
-import {Author} from "../book/model/author";
-import {AuthorServiceService} from "../shared/author-service.service";
+import {Genre} from "../model/genre.enum";
+import {Country} from "../model/country.enum";
+import {Author} from "../model/author";
+import {AuthorService} from "../service/author.service";
 
 @Component({
   selector: 'app-add-book',
@@ -20,7 +20,7 @@ export class AddBookComponent implements OnInit {
   keysCountry: string[];
   authors: Author[];
 
-  constructor(private http: HttpClient, public router:Router, private authorServiceService: AuthorServiceService) {
+  constructor(private http: HttpClient, public router:Router, private authorServiceService: AuthorService) {
     this.keys = Object.keys(this.genre).filter(f => !isNaN(Number(f)));
     this.keysCountry = Object.keys(this.country).filter(f => !isNaN(Number(f)));
   }

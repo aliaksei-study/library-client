@@ -21,6 +21,8 @@ export class AuthenticationInterceptor implements HttpInterceptor {
     return next.handle(xhr).pipe(catchError((err: HttpErrorResponse) => {
       if (err.status === 401) {
         this.router.navigate(['/login']);
+        localStorage.removeItem("email");
+        localStorage.removeItem("password");
       }
       return throwError(err);
     }));
