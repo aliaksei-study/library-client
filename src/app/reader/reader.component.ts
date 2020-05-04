@@ -9,22 +9,30 @@ import {ReaderService} from "../service/reader.service";
 })
 export class ReaderComponent implements OnInit {
   readers: Reader[] = [];
-  p: number;
+  pages: Array<number>;
+  currentPage:number = 0;
 
   constructor(private readerService: ReaderService) {
   }
 
   ngOnInit(): void {
-    this.getAllReaders();
+    this.getAllReaders(this.currentPage);
   }
 
-  public getAllReaders() {
-    this.readerService.getAllReaders().subscribe(
+  public setPage(indexOfPage: number, event:any) {
+    event.preventDefault();
+    this.currentPage = indexOfPage;
+    this.getAllReaders(this.currentPage);
+  }
+
+  public getAllReaders(page: number) {
+    this.readerService.getReaderPage(page).subscribe(
       res => {
-        this.readers = res;
+        this.readers = res['content'];
+        this.pages = new Array(res['totalPages']);
       },
       err => {
-        alert("An error occured");
+        console.log(err);
       }
     )
   }

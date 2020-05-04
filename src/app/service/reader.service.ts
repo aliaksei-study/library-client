@@ -15,8 +15,8 @@ export class ReaderService {
 
   constructor(private http : HttpClient, private router: Router) { }
 
-  getAllReaders() : Observable<Reader[]> {
-    return this.http.get<Reader[]>(URLHelper.READERS_URL);
+  getReaderPage(page: number) {
+    return this.http.get(URLHelper.READERS_PAGE_URL + page);
   }
 
   addAuthor(readerDto: ReaderDto) : Observable<any> {
