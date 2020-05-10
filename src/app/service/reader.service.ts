@@ -19,7 +19,16 @@ export class ReaderService {
     return this.http.get(URLHelper.READERS_PAGE_URL + page);
   }
 
-  addAuthor(readerDto: ReaderDto) : Observable<any> {
+  getReaderById(id: number) : Observable<Reader> {
+    return this.http.get<Reader>(URLHelper.READERS_URL + "/" + id).pipe(catchError((err: HttpErrorResponse) => {
+      if(err.status > 0) {
+        this.router.navigate(['/login']);
+      }
+      return throwError("Can't find reader with id : " + id);
+    }))
+  }
+
+  addReader(readerDto: ReaderDto) : Observable<any> {
     return this.http.post(URLHelper.READERS_URL, readerDto).pipe(catchError((err: HttpErrorResponse) => {
       if (err.status > 0) {
         this.router.navigate(['/login']);

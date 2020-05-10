@@ -1,0 +1,15 @@
+h2 {
+  text-align: center;
+  margin-top:3%;
+  font-style: italic;
+  font-size: 30px;
+}
+
+h5 {
+  color: red;
+  font-size: 16px;
+}
+
+.invalid-input {
+  color:red;
+}

@@ -12,7 +12,7 @@
   </tr>
   <tr *ngFor="let reader of readers">
     <td><input type="checkbox" value="{{reader.id}}"/> &nbsp;</td>
-    <td><a routerLink="/readers/edit/{{reader.id}}">{{reader.name}}</a></td>
+    <td><a routerLink="/readers/{{reader.id}}">{{reader.name}}</a></td>
     <td>{{reader.surname}}</td>
     <td>{{reader.book?.title}}</td>
   </tr>

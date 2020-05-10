@@ -15,6 +15,7 @@ import { GenresPipe } from './pipe/genres.pipe';
 import { AddAuthorComponent } from './add-author/add-author.component';
 import { LoginComponent } from './login/login.component';
 import {AuthenticationInterceptor} from "./interceptor/authentication-interceptor";
+import { UpdateReaderComponent } from './update-reader/update-reader.component';
 
 const appRoutes : Routes = [
   {
@@ -43,8 +44,8 @@ const appRoutes : Routes = [
     component:AddReaderComponent
   },
   {
-    path:"readers/edit/:id",
-    component:AddReaderComponent
+    path:"readers/:id",
+    component:UpdateReaderComponent
   },
   {
     path:"authors/add",
@@ -62,7 +63,8 @@ const appRoutes : Routes = [
     AddReaderComponent,
     GenresPipe,
     AddAuthorComponent,
-    LoginComponent
+    LoginComponent,
+    UpdateReaderComponent
   ],
   imports: [
     BrowserModule,

@@ -13,11 +13,13 @@ import {NgModel} from "@angular/forms";
 })
 export class AddReaderComponent implements OnInit {
   model:ReaderDto = new ReaderDto();
-  reader:Reader = new Reader();
 
-  constructor(private http: HttpClient, public router:Router, private readerService: ReaderService) { }
+  constructor(public router:Router, private readerService: ReaderService) {
+
+  }
 
   ngOnInit(): void {
+
   }
 
   validateFileExtension(file: NgModel) : boolean{
@@ -29,9 +31,9 @@ export class AddReaderComponent implements OnInit {
   }
 
   addReader() : void {
-    this.readerService.addAuthor(this.model).subscribe(
+    this.readerService.addReader(this.model).subscribe(
       () => {
-        this.router.navigate(['/login']);
+        this.router.navigate(['/readers']);
       },
       err => {
         console.log(err);
