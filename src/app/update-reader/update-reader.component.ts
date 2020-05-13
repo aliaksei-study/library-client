@@ -1,10 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import {Reader} from "../model/reader";
+import {Component, OnInit} from '@angular/core';
 import {NgModel} from "@angular/forms";
 import {ReaderService} from "../service/reader.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ReaderDto} from "../dto/reader-dto";
-import {readFileSync} from "fs";
 
 @Component({
   selector: 'app-update-reader',
@@ -13,8 +11,8 @@ import {readFileSync} from "fs";
 })
 export class UpdateReaderComponent implements OnInit {
   readerDto: ReaderDto;
-  urlPhoto: String;
   id:number;
+  imageFile: any;
 
   constructor(private route: ActivatedRoute,private router: Router, private readerService:ReaderService) {
 
@@ -36,15 +34,23 @@ export class UpdateReaderComponent implements OnInit {
         this.readerDto.userDto.password = data.user.password;
         this.readerDto.userDto.role = data.user.role;
         this.readerDto.phone = data.phone;
-        this.urlPhoto = data.photo?.urlPhoto;
-        const file = readFileSync(this.urlPhoto);
-        alert(file.readInt8());
       },
       err => {
         console.log(err);
       }
     );
+
+    this.readerService.getImage().subscribe(
+      data => {
+        this.imageFile = data;
+      },
+      err => {
+        alert("error occured");
+      }
+    )
+
   }
+
 
   validateFileExtension(file: NgModel) : boolean{
     if(file.value === undefined) {
@@ -60,5 +66,11 @@ export class UpdateReaderComponent implements OnInit {
 
   backToReaderPage() {
     this.router.navigate(['/readers']);
+  }
+
+  deleteImageIfFileSelected():void {
+    if(this.readerDto.photoDto != undefined) {
+      document.getElementById("image").hidden = true;
+    }
   }
 }

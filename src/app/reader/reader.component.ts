@@ -10,6 +10,7 @@ import {ReaderService} from "../service/reader.service";
 export class ReaderComponent implements OnInit {
   readers: Reader[] = [];
   pages: Array<number>;
+  checkBoxesList: Array<number> = [];
   currentPage:number = 0;
 
   constructor(private readerService: ReaderService) {
@@ -35,5 +36,14 @@ export class ReaderComponent implements OnInit {
         console.log(err);
       }
     )
+  }
+
+  public updateClickedCheckboxesList(id:number, event) :void {
+    if(event.target.checked) {
+      this.checkBoxesList.push(id);
+      alert("checked");
+    } else {
+      alert("not checked");
+    }
   }
 }

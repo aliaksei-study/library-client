@@ -4,7 +4,7 @@ import {Observable, pipe, throwError} from "rxjs";
 import {Reader} from "../model/reader";
 import {URLHelper} from "../util/urlhelper";
 import {Author} from "../model/author";
-import {catchError} from "rxjs/operators";
+import {catchError, map} from "rxjs/operators";
 import {Router} from "@angular/router";
 import {ReaderDto} from "../dto/reader-dto";
 
@@ -35,5 +35,9 @@ export class ReaderService {
       }
       return throwError("User with such email already exists");
     }));
+  }
+
+  getImage(): Observable<any> {
+    return this.http.get(URLHelper.BASE_URL + "/photos");
   }
 }

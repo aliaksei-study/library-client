@@ -64,6 +64,7 @@ table#entity-list th {
 }
 
 .small-button {
+  margin-left: 2%;
   color : gray;
   background: white;
   font-weight: 700;
@@ -85,6 +86,5 @@ table#entity-list th {
 }
 
 div > a {
-  margin-right:76%;
   margin-bottom: 1%;
 }

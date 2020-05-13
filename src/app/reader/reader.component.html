@@ -2,6 +2,7 @@
 <div>
   <a routerLink="/readers/add" class="href-button-add">Add a reader</a>
   <button class="small-button">Send an email</button>
+  <button class="small-button">Remove selected readers</button>
 </div>
 <table id="entity-list">
   <tr>
@@ -11,7 +12,7 @@
     <th>Title of reading book</th>
   </tr>
   <tr *ngFor="let reader of readers">
-    <td><input type="checkbox" value="{{reader.id}}"/> &nbsp;</td>
+    <td><input type="checkbox" value="{{reader.id}}" id="{{reader.id}}" (click)="updateClickedCheckboxesList(reader.id, $event)"/> &nbsp;</td>
     <td><a routerLink="/readers/{{reader.id}}">{{reader.name}}</a></td>
     <td>{{reader.surname}}</td>
     <td>{{reader.book?.title}}</td>

@@ -97,9 +97,10 @@
       </div>
     </div>
   </div>
-  <div class="custom-file">
-    <input type="file" class="custom-file-input" id="file" name="file" [(ngModel)]="readerDto.id"
-           #file="ngModel"
+  <img [src]="imageFile" id="image" alt="Your image" class="img-thumbnail" />
+  <div class="mt-2 custom-file">
+    <input type="file" class="custom-file-input" id="file" name="file" [(ngModel)]="readerDto?.photoDto.file"
+           #file="ngModel" (change)="deleteImageIfFileSelected()"
            [ngClass]="{'is-invalid' : f.submitted && validateFileExtension(file)}">
     <label class="custom-file-label" for="file">Choose file</label>
     <div *ngIf="f.submitted && validateFileExtension(file)" class="invalid-input">
