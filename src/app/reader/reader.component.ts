@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit} from '@angular/core';
 import {Reader} from "../model/reader";
 import {ReaderService} from "../service/reader.service";
 
@@ -14,6 +14,9 @@ export class ReaderComponent implements OnInit {
   currentPage:number = 0;
 
   constructor(private readerService: ReaderService) {
+    setTimeout(() => {
+      this.setClickedCheckBoxes();
+    },500);
   }
 
   ngOnInit(): void {
@@ -24,6 +27,9 @@ export class ReaderComponent implements OnInit {
     event.preventDefault();
     this.currentPage = indexOfPage;
     this.getAllReaders(this.currentPage);
+    setTimeout(() => {
+      this.setClickedCheckBoxes();
+    },500);
   }
 
   public getAllReaders(page: number) {
@@ -38,12 +44,27 @@ export class ReaderComponent implements OnInit {
     )
   }
 
+  public setClickedCheckBoxes(): void {
+    let checkBoxes = document.getElementsByTagName('input');
+    for(let i = 0; i < checkBoxes.length; i++) {
+        if(this.checkBoxesList.indexOf(+checkBoxes.item(i).value) != -1) {
+          checkBoxes.item(i).checked = true;
+        }
+    }
+  }
+
   public updateClickedCheckboxesList(id:number, event) :void {
     if(event.target.checked) {
       this.checkBoxesList.push(id);
-      alert("checked");
+      alert(this.checkBoxesList.toString());
     } else {
-      alert("not checked");
+      let deletedIndex;
+      deletedIndex = this.checkBoxesList.indexOf(id);
+      alert(deletedIndex);
+      if(deletedIndex != -1) {
+        this.checkBoxesList.splice(deletedIndex, 1);
+      }
+      alert(this.checkBoxesList.toString());
     }
   }
 }
