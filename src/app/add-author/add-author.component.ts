@@ -24,6 +24,5 @@ export class AddAuthorComponent implements OnInit {
         alert("Some errors occurred");
       }
     );
-    ;
   }
 }

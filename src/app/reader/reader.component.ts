@@ -67,4 +67,15 @@ export class ReaderComponent implements OnInit {
       alert(this.checkBoxesList.toString());
     }
   }
+
+  deleteReaders(): void {
+    this.readerService.deleteReaders(this.checkBoxesList).subscribe(
+      () => {
+        alert("deleted");
+      },
+      err => {
+        console.log(err);
+      }
+    )
+  }
 }

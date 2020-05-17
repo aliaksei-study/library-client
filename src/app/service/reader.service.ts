@@ -37,7 +37,25 @@ export class ReaderService {
     }));
   }
 
-  getImage(): Observable<any> {
-    return this.http.get(URLHelper.BASE_URL + "/photos");
+  updateReader(readerDto: ReaderDto, id:number) :Observable<any> {
+    return this.http.put(URLHelper.READERS_URL + "/" + id, readerDto).pipe(catchError((err: HttpErrorResponse) => {
+      if(err.status > 0) {
+        this.router.navigate(['/login']);
+      }
+      return throwError("Some errors occured while updating reader");
+    }))
+  }
+
+  getImage(imageId:number): Observable<any> {
+    return this.http.get(URLHelper.PHOTOS_URL + "/" + imageId);
+  }
+
+  deleteReaders(readerIds:Array<number>) :Observable<any> {
+    return this.http.delete(URLHelper.READERS_URL + "/" + readerIds).pipe(catchError((err:HttpErrorResponse) => {
+      if(err.status > 0) {
+        this.router.navigate(['/login']);
+      }
+      return throwError("Some errors occured while deleting reader");
+    }))
   }
 }

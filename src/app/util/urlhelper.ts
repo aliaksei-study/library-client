@@ -4,5 +4,6 @@ export class URLHelper {
   static readonly BOOKS_URL = `${URLHelper.BASE_URL}\\books`;
   static readonly READERS_URL = `${URLHelper.BASE_URL}\\readers`;
   static readonly READERS_PAGE_URL = `${URLHelper.BASE_URL}\\readers?page=`;
+  static readonly PHOTOS_URL = `${URLHelper.BASE_URL}\\photos`;
 
 }

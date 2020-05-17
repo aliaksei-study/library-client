@@ -12,9 +12,10 @@ import {ReaderDto} from "../dto/reader-dto";
 export class UpdateReaderComponent implements OnInit {
   readerDto: ReaderDto;
   id:number;
+  imageId: number;
   imageFile: any;
 
-  constructor(private route: ActivatedRoute,private router: Router, private readerService:ReaderService) {
+  constructor(private route: ActivatedRoute, private router: Router, private readerService: ReaderService) {
 
   }
 
@@ -34,26 +35,28 @@ export class UpdateReaderComponent implements OnInit {
         this.readerDto.userDto.password = data.user.password;
         this.readerDto.userDto.role = data.user.role;
         this.readerDto.phone = data.phone;
+        this.imageId = data.photo.id;
       },
       err => {
         console.log(err);
       }
     );
 
-    this.readerService.getImage().subscribe(
-      data => {
-        this.imageFile = data;
-      },
-      err => {
-        alert("error occured");
-      }
-    )
+    setTimeout(() => {
+      this.readerService.getImage(this.imageId).subscribe(
+        data => {
+          this.imageFile = data;
+        },
+        err => {
+          alert("error occured");
+        }
+      );
+    },500);
 
   }
 
-
-  validateFileExtension(file: NgModel) : boolean{
-    if(file.value === undefined) {
+  validateFileExtension(file: NgModel): boolean {
+    if (file.value === undefined) {
       return false;
     } else {
       return !((file.value.endsWith("png")) || (file.value.endsWith("jpeg")) || (file.value.endsWith("jpg")));
@@ -61,15 +64,22 @@ export class UpdateReaderComponent implements OnInit {
   }
 
   updateReader() {
-    alert("ff");
+    this.readerService.updateReader(this.readerDto, this.id).subscribe(
+      () => {
+        this.router.navigate(['/readers']);
+      },
+      err => {
+        console.log(err);
+      }
+    )
   }
 
   backToReaderPage() {
     this.router.navigate(['/readers']);
   }
 
-  deleteImageIfFileSelected():void {
-    if(this.readerDto.photoDto != undefined) {
+  deleteImageIfFileSelected(): void {
+    if (this.readerDto.photoDto != undefined) {
       document.getElementById("image").hidden = true;
     }
   }

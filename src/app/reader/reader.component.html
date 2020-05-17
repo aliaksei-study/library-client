@@ -2,7 +2,7 @@
 <div>
   <a routerLink="/readers/add" class="href-button-add">Add a reader</a>
   <button class="small-button">Send an email</button>
-  <button class="small-button">Remove selected readers</button>
+  <button class="small-button" (click)="deleteReaders()">Remove selected readers</button>
 </div>
 <table id="entity-list">
   <tr>
