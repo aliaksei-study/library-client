@@ -1,0 +1,25 @@
+<h1 class="templateTitle">List of readers</h1>
+<div>
+  <a routerLink="/authors/add" class="href-button-add">Add an author</a>
+  <button class="small-button" (click)="deleteAuthors()">Remove selected authors</button>
+</div>
+<table id="entity-list">
+  <tr>
+    <th></th>
+    <th>Reader's name</th>
+    <th>Reader's surname</th>
+    <th>Date of birth</th>
+  </tr>
+  <tr *ngFor="let author of authors">
+    <td><input type="checkbox" value="{{author.id}}" id="{{author.id}}" (click)="updateClickedCheckboxesList(author.id, $event)"/> &nbsp;</td>
+    <td><a routerLink="/authors/{{author.id}}">{{author.name}}</a></td>
+    <td>{{author.surname}}</td>
+    <td>{{author.dateOfBirth}}</td>
+  </tr>
+</table>
+<hr>
+<ul class="nav nav-pills">
+  <li class="nav-item" *ngFor="let page of pages; let i=index">
+    <a class="nav-link" href="" (click)="setPage(i, $event)">{{i+1}}</a>
+  </li>
+</ul>

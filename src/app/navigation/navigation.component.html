@@ -1,5 +1,6 @@
 <div class="topnav">
   <a routerLink="/books" *ngIf="router.url != '/login'">Books</a>
   <a routerLink="/readers" *ngIf="router.url != '/login'">Readers</a>
+  <a routerLink="/authors" *ngIf="router.url != '/login'">Authors</a>
   <a *ngIf="router.url != '/login'" (click)="logout()">Logout</a>
 </div>

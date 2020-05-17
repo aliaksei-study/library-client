@@ -56,26 +56,28 @@ export class ReaderComponent implements OnInit {
   public updateClickedCheckboxesList(id:number, event) :void {
     if(event.target.checked) {
       this.checkBoxesList.push(id);
-      alert(this.checkBoxesList.toString());
     } else {
       let deletedIndex;
       deletedIndex = this.checkBoxesList.indexOf(id);
-      alert(deletedIndex);
       if(deletedIndex != -1) {
         this.checkBoxesList.splice(deletedIndex, 1);
       }
-      alert(this.checkBoxesList.toString());
     }
   }
 
   deleteReaders(): void {
-    this.readerService.deleteReaders(this.checkBoxesList).subscribe(
-      () => {
-        alert("deleted");
-      },
-      err => {
-        console.log(err);
-      }
-    )
+    if(this.checkBoxesList.length != 0) {
+      this.readerService.deleteReaders(this.checkBoxesList).subscribe(
+        () => {
+          document.location.reload();
+          alert("Successfully deleted readers");
+        },
+        err => {
+          console.log(err);
+        }
+      );
+    } else {
+      alert("You don't choose any reader. Please select one reader and try again");
+    }
   }
 }

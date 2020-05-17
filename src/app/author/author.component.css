@@ -1,0 +1,90 @@
+.templateTitle {
+  text-align: center;
+  margin-top:5%;
+  font-style: italic;
+  font-size: 30px;
+}
+
+table {
+  width:100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2%;
+}
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 15px;
+  text-align: center;
+}
+table#entity-list tr:nth-child(even) {
+  background-color: #eee;
+}
+table#entity-list tr:nth-child(odd) {
+  background-color: #fff;
+}
+table#entity-list th {
+  background-color: #5d5785;
+  color: white;
+}
+
+.href-button {
+  color: #fff; /* цвет текста */
+  text-decoration: none; /* убирать подчёркивание у ссылок */
+  user-select: none; /* убирать выделение текста */
+  background: #3339D4; /* фон кнопки */
+  padding: 5px 10px;
+  outline: none; /* убирать контур в Mozilla */
+  border-radius: 5px;
+}
+.href-button:hover { background: #121BE8; } /* при наведении курсора мышки */
+.href-button:active { background: #000198; } /* при нажатии */
+
+.href-button-add {
+  display: inline-block;
+  color: gray;
+  font-weight: 700;
+  text-decoration: none;
+  user-select: none;
+  padding: 5px 20px;
+  outline: none;
+  border: 2px solid;
+  border-radius: 1px;
+  transition: 0.2s;
+}
+.href-button-add:hover {
+  background: gray;
+  color:green;
+}
+.href-button-add:active {
+  background: dimgray;
+  color:green;
+}
+
+.small-button {
+  margin-left: 2%;
+  color : gray;
+  background: white;
+  font-weight: 700;
+  padding: 6px 20px;
+  border: 2px solid;
+  border-radius: 1px;
+  transition: 0.2s;
+  outline:none;
+}
+
+.small-button:hover {
+  background: gray;
+  color:red;
+}
+
+.small-button:active {
+  background: dimgray;
+  color:red;
+}
+
+div > a {
+  margin-bottom: 1%;
+}
