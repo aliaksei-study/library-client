@@ -20,7 +20,7 @@ export class AddBookComponent implements OnInit {
   keysCountry: string[];
   authors: Author[];
 
-  constructor(private http: HttpClient, public router:Router, private authorServiceService: AuthorService) {
+  constructor(private http: HttpClient, public router:Router) {
     this.keys = Object.keys(this.genre).filter(f => !isNaN(Number(f)));
     this.keysCountry = Object.keys(this.country).filter(f => !isNaN(Number(f)));
   }
@@ -48,14 +48,8 @@ export class AddBookComponent implements OnInit {
   }
 
   public getAuthors() {
-    this.authorServiceService.getAuthors().subscribe(
-      res => {
-        this.authors = res;
-      },
-      err => {
-        alert("error")
-      }
-    )
+
+
   }
 
 }
