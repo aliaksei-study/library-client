@@ -24,7 +24,14 @@ export class AuthorComponent implements OnInit {
   }
 
   deleteAuthors(): void {
-    alert("delete");
+    this.authorService.deleteAuthors(this.checkBoxesList).subscribe(
+      () => {
+        console.log("successfully deleted all authors");
+      },
+      err => {
+        console.log(err);
+      }
+    )
   }
 
   public setPage(indexOfPage: number, event:any) {

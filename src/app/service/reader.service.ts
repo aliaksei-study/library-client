@@ -25,7 +25,7 @@ export class ReaderService {
         this.router.navigate(['/login']);
       }
       return throwError("Can't find reader with id : " + id);
-    }))
+    }));
   }
 
   addReader(readerDto: ReaderDto) : Observable<any> {

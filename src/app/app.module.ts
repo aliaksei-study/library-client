@@ -17,6 +17,7 @@ import { LoginComponent } from './login/login.component';
 import {AuthenticationInterceptor} from "./interceptor/authentication-interceptor";
 import { UpdateReaderComponent } from './update-reader/update-reader.component';
 import { AuthorComponent } from './author/author.component';
+import { UpdateAuthorComponent } from './update-author/update-author.component';
 
 const appRoutes : Routes = [
   {
@@ -55,6 +56,10 @@ const appRoutes : Routes = [
   {
     path:"authors/add",
     component:AddAuthorComponent
+  },
+  {
+    path:"authors/:id",
+    component:UpdateAuthorComponent
   }
 ];
 
@@ -70,7 +75,8 @@ const appRoutes : Routes = [
     AddAuthorComponent,
     LoginComponent,
     UpdateReaderComponent,
-    AuthorComponent
+    AuthorComponent,
+    UpdateAuthorComponent
   ],
   imports: [
     BrowserModule,
