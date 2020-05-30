@@ -12,6 +12,7 @@ export class AuthorComponent implements OnInit {
   pages: Array<number>;
   checkBoxesList: Array<number> = [];
   currentPage:number = 0;
+  sizeOfPage: number = 2;
 
   constructor(private authorService: AuthorService) {
     setTimeout(() => {
@@ -20,7 +21,7 @@ export class AuthorComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAllAuthors(this.currentPage);
+    this.getAllAuthors(this.currentPage, this.sizeOfPage);
   }
 
   deleteAuthors(): void {
@@ -37,14 +38,14 @@ export class AuthorComponent implements OnInit {
   public setPage(indexOfPage: number, event:any) {
     event.preventDefault();
     this.currentPage = indexOfPage;
-    this.getAllAuthors(this.currentPage);
+    this.getAllAuthors(this.currentPage, this.sizeOfPage);
     setTimeout(() => {
       this.setClickedCheckBoxes();
     },500);
   }
 
-  public getAllAuthors(page: number) {
-    this.authorService.getAuthorPage(page).subscribe(
+  public getAllAuthors(page: number, sizeOfPage: number) {
+    this.authorService.getAuthorPage(page, sizeOfPage).subscribe(
       res => {
         this.authors = res['content'];
         this.pages = new Array(res['totalPages']);

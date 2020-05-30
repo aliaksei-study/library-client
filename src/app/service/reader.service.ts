@@ -15,8 +15,8 @@ export class ReaderService {
 
   constructor(private http : HttpClient, private router: Router) { }
 
-  getReaderPage(page: number) {
-    return this.http.get(URLHelper.READERS_PAGE_URL + page);
+  getReaderPage(page: number, sizeOfPage:number) {
+    return this.http.get(URLHelper.READERS_PAGE_URL + page + "&sizeOfPage=" + sizeOfPage);
   }
 
   getReaderById(id: number) : Observable<Reader> {

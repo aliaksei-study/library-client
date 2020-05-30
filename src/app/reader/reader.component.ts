@@ -12,6 +12,7 @@ export class ReaderComponent implements OnInit {
   pages: Array<number>;
   checkBoxesList: Array<number> = [];
   currentPage:number = 0;
+  sizeOfPage: number = 4;
 
   constructor(private readerService: ReaderService) {
     setTimeout(() => {
@@ -20,20 +21,20 @@ export class ReaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAllReaders(this.currentPage);
+    this.getAllReaders(this.currentPage, this.sizeOfPage);
   }
 
   public setPage(indexOfPage: number, event:any) {
     event.preventDefault();
     this.currentPage = indexOfPage;
-    this.getAllReaders(this.currentPage);
+    this.getAllReaders(this.currentPage, this.sizeOfPage);
     setTimeout(() => {
       this.setClickedCheckBoxes();
     },500);
   }
 
-  public getAllReaders(page: number) {
-    this.readerService.getReaderPage(page).subscribe(
+  public getAllReaders(page: number, pageSize:number) {
+    this.readerService.getReaderPage(page, pageSize).subscribe(
       res => {
         this.readers = res['content'];
         this.pages = new Array(res['totalPages']);

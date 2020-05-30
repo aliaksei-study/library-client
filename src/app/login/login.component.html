@@ -1,17 +1,31 @@
 <h2>Login form</h2>
-<form class="login-form" #f="ngForm" (ngSubmit)="login()">
+<form class="login-form" #f="ngForm" (submit)="f.form.valid && login()">
   <div class="form-group">
     <label for="email">Email address</label>
-    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email"
-    name="email" #email="ngModel" [(ngModel)]="user.email"
-    >
+    <input type="email" class="form-control"
+           id="email" aria-describedby="emailHelp"
+           placeholder="Enter email"
+           name="email" #email="ngModel" [(ngModel)]="user.email"
+           [ngClass]="{'is-invalid' : f.submitted && email.invalid}"
+           required email>
     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    <div *ngIf="f.submitted && email.invalid" class="invalid-input">
+      <div *ngIf="email.errors?.required">Email should exists</div>
+      <div *ngIf="email.errors?.email">Email is not valid email</div>
+    </div>
   </div>
   <div class="form-group">
     <label for="password">Password</label>
-    <input type="password" class="form-control" id="password" placeholder="Password" name="password"
+    <input type="password" class="form-control" id="password"
+           placeholder="Password" name="password"
            [(ngModel)]="user.password"
-           #password="ngModel">
+           #password="ngModel"
+           [ngClass]="{'is-invalid' : f.submitted && password.invalid}"
+           required minlength="5" >
+    <div *ngIf="f.submitted && password.invalid" class="invalid-input">
+      <div *ngIf="password.errors?.required">Password should exists</div>
+      <div *ngIf="password.errors?.minlength">Password should be at least greater than 5 characters</div>
+    </div>
   </div>
   <button type="submit" class="btn btn-primary">Login</button>
 </form>

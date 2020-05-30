@@ -10,7 +10,7 @@ import {Book} from "../model/book";
 export class BookComponent implements OnInit {
   books:Book[] = [];
 
-  constructor(private apiService : ApiService) {
+  constructor() {
   }
 
   ngOnInit(): void {
@@ -18,14 +18,7 @@ export class BookComponent implements OnInit {
   }
 
   public getAllBooks() {
-    this.apiService.getAllBooks().subscribe(
-      res => {
-        this.books = res;
-      },
-      err => {
-        alert("An error occured");
-      }
-    )
+
   }
 
 }

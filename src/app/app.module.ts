@@ -18,6 +18,7 @@ import {AuthenticationInterceptor} from "./interceptor/authentication-intercepto
 import { UpdateReaderComponent } from './update-reader/update-reader.component';
 import { AuthorComponent } from './author/author.component';
 import { UpdateAuthorComponent } from './update-author/update-author.component';
+import { CountriesPipe } from './pipe/countries.pipe';
 
 const appRoutes : Routes = [
   {
@@ -76,7 +77,8 @@ const appRoutes : Routes = [
     LoginComponent,
     UpdateReaderComponent,
     AuthorComponent,
-    UpdateAuthorComponent
+    UpdateAuthorComponent,
+    CountriesPipe
   ],
   imports: [
     BrowserModule,
