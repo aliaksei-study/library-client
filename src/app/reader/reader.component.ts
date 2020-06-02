@@ -42,7 +42,7 @@ export class ReaderComponent implements OnInit {
       err => {
         console.log(err);
       }
-    )
+    );
   }
 
   public setClickedCheckBoxes(): void {

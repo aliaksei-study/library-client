@@ -16,20 +16,28 @@
   <tr>
     <th></th>
     <th>Name of the book</th>
+    <th>Authors of the book</th>
     <th>Publication date</th>
     <th>Publisher's address</th>
     <th>Reader's name and surname</th>
     <th>Action with book</th>
   </tr>
   <tr *ngFor="let book of books">
-    <td><input type="checkbox" value="{{book.id}}"/> &nbsp;</td>
+    <td><input type="checkbox" value="{{book.id}}" (click)="updateClickedCheckboxesList(book.id, $event)"/> &nbsp;</td>
     <td>{{book.title}}</td>
+    <td><p *ngFor="let author of book.authors">{{author.name}}</p></td>
     <td>{{book.publicationDate}}</td>
     <td>{{book.publisher?.address?.city}} {{book.publisher?.address?.region}}</td>
-    <td>{{book.reader?.name}}, {{book.reader?.surname}}</td>
+    <td>{{book.reader?.surname}} {{book.reader?.name}}</td>
     <td>
       <a href="#" class="href-button">Выдать</a>
       <a href="#" class="href-button">Вернуть</a>
     </td>
   </tr>
 </table>
+<hr>
+<ul class="nav nav-pills">
+  <li class="nav-item" *ngFor="let page of pages; let i=index">
+    <a class="nav-link" href="" (click)="setPage(i, $event)">{{i+1}}</a>
+  </li>
+</ul>

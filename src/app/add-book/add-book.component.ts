@@ -7,6 +7,9 @@ import {Country} from "../model/country.enum";
 import {Author} from "../model/author";
 import {AuthorService} from "../service/author.service";
 import {PhotoDto} from "../dto/photo-dto";
+import {CoverDto} from "../dto/cover-dto";
+import {NgModel} from "@angular/forms";
+import {BookService} from "../service/book.service";
 
 @Component({
   selector: 'app-add-book',
@@ -20,9 +23,10 @@ export class AddBookComponent implements OnInit {
   authors: Author[];
   sizeOfPage: number = 2147483647;
   selectedAuthors: Author[] =[];
-  coversPhotoDto: PhotoDto[] = [];
+  coversDto: CoverDto[] = [];
 
-  constructor(private http: HttpClient, public router: Router, private authorService: AuthorService) {
+  constructor(private http: HttpClient, public router: Router, private authorService: AuthorService,
+              private bookService: BookService) {
   }
 
   ngOnInit(): void {
@@ -34,7 +38,15 @@ export class AddBookComponent implements OnInit {
   }
 
   addBook(): void {
-
+    this.model.authorDto = this.selectedAuthors;
+    this.bookService.saveBook(this.model).subscribe(
+      () => {
+        this.router.navigate(['/books']);
+      },
+      err => {
+        console.log(err);
+      }
+    );
   }
 
   public getAuthors(page: number, sizeOfPage:number) {
@@ -105,6 +117,12 @@ export class AddBookComponent implements OnInit {
 
   saveCoverToList() {
 
+  }
+
+  isFileHasExceptableExtension(file) {
+    if(file.value != undefined) {
+      alert((file.value.endsWith("png")) || (file.value.endsWith("jpeg")) || (file.value.endsWith("jpg")));
+    }
   }
 
 
