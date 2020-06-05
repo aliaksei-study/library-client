@@ -24,14 +24,14 @@
   </tr>
   <tr *ngFor="let book of books">
     <td><input type="checkbox" value="{{book.id}}" (click)="updateClickedCheckboxesList(book.id, $event)"/> &nbsp;</td>
-    <td>{{book.title}}</td>
+    <td><a routerLink="/books/{{book.id}}">{{book.title}}</a></td>
     <td><p *ngFor="let author of book.authors">{{author.name}}</p></td>
     <td>{{book.publicationDate}}</td>
     <td>{{book.publisher?.address?.city}} {{book.publisher?.address?.region}}</td>
-    <td>{{book.reader?.surname}} {{book.reader?.name}}</td>
+    <td><a routerLink="/readers/{{book.reader?.id}}">{{book.reader?.surname}} {{book.reader?.name}} </a></td>
     <td>
-      <a href="#" class="href-button">Выдать</a>
-      <a href="#" class="href-button">Вернуть</a>
+      <a routerLink="/keeper-give-out/{{book.id}}" class="href-button">Give out</a>
+      <a href="/keeper-return/{{book.id}}" class="href-button">Return</a>
     </td>
   </tr>
 </table>

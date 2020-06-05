@@ -19,6 +19,8 @@ import { UpdateReaderComponent } from './update-reader/update-reader.component';
 import { AuthorComponent } from './author/author.component';
 import { UpdateAuthorComponent } from './update-author/update-author.component';
 import { CountriesPipe } from './pipe/countries.pipe';
+import { UpdateBookComponent } from './update-book/update-book.component';
+import { BookKeeperComponent } from './book-keeper/book-keeper.component';
 
 const appRoutes : Routes = [
   {
@@ -61,6 +63,18 @@ const appRoutes : Routes = [
   {
     path:"authors/:id",
     component:UpdateAuthorComponent
+  },
+  {
+    path:"books/:id",
+    component:UpdateBookComponent
+  },
+  {
+    path:"keeper-give-out/:bookId",
+    component:BookKeeperComponent
+  },
+  {
+    path:"keeper-return/:bookId",
+    component:BookKeeperComponent
   }
 ];
 
@@ -78,7 +92,9 @@ const appRoutes : Routes = [
     UpdateReaderComponent,
     AuthorComponent,
     UpdateAuthorComponent,
-    CountriesPipe
+    CountriesPipe,
+    UpdateBookComponent,
+    BookKeeperComponent
   ],
   imports: [
     BrowserModule,

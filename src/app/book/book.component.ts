@@ -12,7 +12,7 @@ export class BookComponent implements OnInit {
   pages: Array<number>;
   checkBoxesList: Array<number> = [];
   currentPage:number = 0;
-  sizeOfPage: number = 4;
+  sizeOfPage: number = 3;
 
   constructor(private bookService: BookService) {
     setTimeout(() => {
