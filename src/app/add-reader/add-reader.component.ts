@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
-import {Reader} from "../model/reader";
 import {ReaderService} from "../service/reader.service";
 import {ReaderDto} from "../dto/reader-dto";
 import {NgModel} from "@angular/forms";

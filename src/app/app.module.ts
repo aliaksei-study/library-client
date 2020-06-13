@@ -71,10 +71,6 @@ const appRoutes : Routes = [
   {
     path:"keeper-give-out/:bookId",
     component:BookKeeperComponent
-  },
-  {
-    path:"keeper-return/:bookId",
-    component:BookKeeperComponent
   }
 ];
 

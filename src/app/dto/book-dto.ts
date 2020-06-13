@@ -1,8 +1,5 @@
-import {Publisher} from "../model/publisher";
 import {Genre} from "../model/genre.enum";
-import {Reader} from "../model/reader";
 import {Author} from "../model/author";
-import {Cover} from "../model/cover";
 import {CoverDto} from "./cover-dto";
 import {PublisherDto} from "./publisher-dto";
 

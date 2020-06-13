@@ -1,4 +1,4 @@
-import {Component, OnInit, Pipe, PipeTransform} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {BookDto} from "../dto/book-dto";
@@ -6,9 +6,7 @@ import {Genre} from "../model/genre.enum";
 import {Country} from "../model/country.enum";
 import {Author} from "../model/author";
 import {AuthorService} from "../service/author.service";
-import {PhotoDto} from "../dto/photo-dto";
 import {CoverDto} from "../dto/cover-dto";
-import {NgModel} from "@angular/forms";
 import {BookService} from "../service/book.service";
 
 @Component({
@@ -124,16 +122,6 @@ export class AddBookComponent implements OnInit {
       alert((file.value.endsWith("png")) || (file.value.endsWith("jpeg")) || (file.value.endsWith("jpg")));
     }
   }
-
-
-
-
-
-  /*keys: string[];
-    keysCountry: string[];*/
-  /*this.keys = Object.keys(this.genre).filter(f => !isNaN(Number(f)));
-    this.keysCountry = Object.keys(this.country).filter(f => !isNaN(Number(f)));*/
-  //<option *ngFor="let key of keys" value="{{key}}">{{genre[key]}}</option>
 }
 
 

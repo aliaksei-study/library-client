@@ -1,6 +1,6 @@
 import {Component, OnChanges, OnInit} from '@angular/core';
-import {Reader} from "../model/reader";
 import {ReaderService} from "../service/reader.service";
+import {Reader} from "../model/reader";
 
 @Component({
   selector: 'app-reader',

@@ -1,23 +1,51 @@
-<h2 *ngIf="router.url.includes('keeper-give-out'); else showReturnLabel">Give out the book</h2>
-<ng-template #showReturnLabel><h2>Return the book</h2></ng-template>
+<h2>Give out the book</h2>
 <form name="form" #f="ngForm" (submit)="f.form.valid && sendBookKeeper()">
   <div class="form-group">
     <label for="bookInput">Title of the book</label>
     <input type="text" class="form-control" id="bookInput" name="title" placeholder="Example input placeholder"
-           [(ngModel)]="book.title" readonly>
+           [(ngModel)]="book.title"
+           #title="ngModel"
+           [ngClass]="{'is-invalid' : f.submitted && title.invalid}"
+           required readonly>
+    <div *ngIf="f.submitted && title.invalid" class="invalid-input">
+      <div *ngIf="title.errors?.required">Field is required</div>
+    </div>
   </div>
-  <div class="row" *ngIf="router.url != '/keeper-return/:bookId'">
+  <div class="form-row">
     <div class="col">
       <label for="giveOutDateInput">Give out date</label>
-      <input type="date" id="giveOutDateInput" class="form-control">
+      <input type="date" id="giveOutDateInput" class="form-control" [(ngModel)]="model.dateOfIssue" name="dateOfIssue"
+             #dateOfIssue="ngModel"
+             [ngClass]="{'is-invalid' : f.submitted && dateOfIssue.invalid}"
+             required>
+      <div *ngIf="f.submitted && dateOfIssue.invalid" class="invalid-input">
+        <div *ngIf="dateOfIssue.errors?.required">Field is required</div>
+      </div>
     </div>
     <div class="col">
-      <label for="formGroupExampleInpu">Return date</label>
-      <input type="date" class="form-control">
+      <label for="returnDateInput">Return date</label>
+      <input type="date" id="returnDateInput" class="form-control" name="returnDate"
+             [(ngModel)]="model.returnDate"
+             #returnDate="ngModel"
+             [ngClass]="{'is-invalid' : f.submitted && returnDate.invalid}"
+             required>
+      <div *ngIf="f.submitted && returnDate.invalid" class="invalid-input">
+        <div *ngIf="returnDate.errors?.required">Field is required</div>
+      </div>
     </div>
   </div>
   <div class="form-group">
-    <label for="formGroupExampleInpu">Example label</label>
-    <input type="text" class="form-control" id="formGroupExampleInpu" placeholder="Example input placeholder" readonly>
+    <label for="reader">Reader</label>
+    <select id="reader" class="form-control" name="reader" [(ngModel)]="model.readerId"
+            #reader="ngModel"
+            [ngClass]="{'is-invalid' : f.submitted && reader.invalid}"
+            required
+    >
+      <option *ngFor="let reader of readers" value="{{reader.id}}">{{reader.surname}} {{reader.name}}</option>
+      <div *ngIf="f.submitted && reader.invalid" class="invalid-input">
+        <div *ngIf="reader.errors?.required">Field is required</div>
+      </div>
+    </select>
   </div>
+  <button type="submit" class="mt-3 btn btn-primary">Give out the book</button>
 </form>

@@ -15,7 +15,7 @@ export class BookService {
   constructor(private http: HttpClient, private router: Router) { }
 
   getBookPage(page:number, sizeOfPage:number){
-    return this.http.get(URLHelper.BOOKS_PAGE_URL + page + "&pageSize=" + sizeOfPage);
+    return this.http.get<Book[]>(URLHelper.BOOKS_PAGE_URL + page + "&pageSize=" + sizeOfPage);
   }
 
   saveBook(bookDto: BookDto) : Observable<any> {

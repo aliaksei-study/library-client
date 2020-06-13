@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {Book} from "../model/book";
 import {BookService} from "../service/book.service";
+import {URLHelper} from "../util/urlhelper";
+import {HttpClient} from "@angular/common/http";
+import {BookKeeperService} from "../service/book-keeper.service";
 
 @Component({
   selector: 'app-book',
@@ -14,10 +17,14 @@ export class BookComponent implements OnInit {
   currentPage:number = 0;
   sizeOfPage: number = 3;
 
-  constructor(private bookService: BookService) {
+  constructor(private bookService: BookService, private bookKeeperService:BookKeeperService) {
     setTimeout(() => {
       this.setClickedCheckBoxes();
     },500);
+  }
+
+  ngOnInit() {
+    this.getBookPage(this.currentPage, this.sizeOfPage);
   }
 
   public setPage(indexOfPage: number, event:any) {
@@ -50,20 +57,26 @@ export class BookComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
-    this.getBookPage(this.currentPage, this.sizeOfPage);
+  public  getBookPage(page: number, pageSize:number) {
+    this.bookService.getBookPage(page, pageSize).subscribe(
+     res => {
+         this.books = res['content'];
+       this.pages = new Array(res['totalPages']);
+     },
+     err => {
+       console.log(err);
+     }
+   );
   }
 
-  public getBookPage(page: number, pageSize:number) {
-    this.bookService.getBookPage(page, pageSize).subscribe(
-      res => {
-        this.books = res['content'];
-        this.pages = new Array(res['totalPages']);
+  returnBook(id: number) {
+    this.bookKeeperService.removeBookKeeper(id).subscribe(
+      () => {
+        window.location.reload();
       },
       err => {
         console.log(err);
       }
-    );
+    )
   }
-
 }

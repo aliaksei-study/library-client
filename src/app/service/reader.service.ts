@@ -1,12 +1,11 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {Observable, pipe, throwError} from "rxjs";
-import {Reader} from "../model/reader";
+import {Observable, throwError} from "rxjs";
 import {URLHelper} from "../util/urlhelper";
-import {Author} from "../model/author";
-import {catchError, map} from "rxjs/operators";
+import {catchError} from "rxjs/operators";
 import {Router} from "@angular/router";
 import {ReaderDto} from "../dto/reader-dto";
+import {Reader} from "../model/reader";
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +24,15 @@ export class ReaderService {
         this.router.navigate(['/login']);
       }
       return throwError("Can't find reader with id : " + id);
+    }));
+  }
+
+  getReaderWithoutBook() : Observable<Reader[]> {
+    return this.http.get<Reader[]>(URLHelper.READERS_URL + "/without-book").pipe(catchError((err: HttpErrorResponse) => {
+      if(err.status > 0) {
+        this.router.navigate(['/login']);
+      }
+      return throwError("Error while loading readers");
     }));
   }
 
