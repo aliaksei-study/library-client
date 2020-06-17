@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
-import {ReaderService} from "../service/reader.service";
-import {ReaderDto} from "../dto/reader-dto";
+import {ReaderService} from "../../service/reader.service";
+import {ReaderDto} from "../../dto/reader-dto";
 import {NgModel} from "@angular/forms";
 
 @Component({

@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {NgModel} from "@angular/forms";
-import {ReaderService} from "../service/reader.service";
+import {ReaderService} from "../../service/reader.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {ReaderDto} from "../dto/reader-dto";
+import {ReaderDto} from "../../dto/reader-dto";
 
 @Component({
   selector: 'app-update-reader',

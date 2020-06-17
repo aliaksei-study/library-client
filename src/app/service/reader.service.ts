@@ -6,6 +6,7 @@ import {catchError} from "rxjs/operators";
 import {Router} from "@angular/router";
 import {ReaderDto} from "../dto/reader-dto";
 import {Reader} from "../model/reader";
+import {Book} from "../model/book";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class ReaderService {
   constructor(private http : HttpClient, private router: Router) { }
 
   getReaderPage(page: number, sizeOfPage:number) {
-    return this.http.get(URLHelper.READERS_PAGE_URL + page + "&sizeOfPage=" + sizeOfPage);
+    return this.http.get<Reader[]>(URLHelper.READERS_PAGE_URL + page + "&pageSize=" + sizeOfPage);
   }
 
   getReaderById(id: number) : Observable<Reader> {
@@ -51,7 +52,7 @@ export class ReaderService {
         this.router.navigate(['/login']);
       }
       return throwError("Some errors occured while updating reader");
-    }))
+    }));
   }
 
   getImage(imageId:number): Observable<any> {
@@ -61,9 +62,18 @@ export class ReaderService {
   deleteReaders(readerIds:Array<number>) :Observable<any> {
     return this.http.delete(URLHelper.READERS_URL + "/" + readerIds).pipe(catchError((err:HttpErrorResponse) => {
       if(err.status > 0) {
-        this.router.navigate(['/login']);
+        alert("You can't delete the reader who is reading the book");
       }
       return throwError("Some errors occured while deleting reader");
-    }))
+    }));
+  }
+
+  getReadingBooks(readerIds:Array<number>) : Observable<any[]> {
+    return this.http.get<any[]>(URLHelper.READING_BOOK_URL + "/" + readerIds).pipe(catchError((err:HttpErrorResponse) => {
+      if(err.status > 0) {
+        this.router.navigate(['/login']);
+      }
+      return throwError("Some errors occured while loading books");
+    }));
   }
 }

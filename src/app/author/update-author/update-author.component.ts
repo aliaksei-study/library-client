@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Author} from "../model/author";
+import {Author} from "../../model/author";
 import {ActivatedRoute, Router} from "@angular/router";
-import {AuthorService} from "../service/author.service";
+import {AuthorService} from "../../service/author.service";
 
 @Component({
   selector: 'app-update-author',
@@ -10,9 +10,10 @@ import {AuthorService} from "../service/author.service";
 })
 export class UpdateAuthorComponent implements OnInit {
   model: Author;
-  id:number;
+  id: number;
 
-  constructor(private route: ActivatedRoute, private router: Router, private authorService: AuthorService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private authorService: AuthorService) {
+  }
 
   ngOnInit(): void {
     this.model = new Author();
@@ -32,8 +33,8 @@ export class UpdateAuthorComponent implements OnInit {
     this.router.navigate(['/authors']);
   }
 
-  updateAuthor() : void {
-    if(this.isTableValuesExists()) {
+  updateAuthor(): void {
+    if (this.isTableValuesExists()) {
       this.authorService.updateAuthor(this.model, this.id).subscribe(
         () => {
           this.router.navigate(['/authors']);

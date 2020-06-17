@@ -16,7 +16,7 @@ export class BookKeeperComponent implements OnInit {
   model:BookKeeperDto = new BookKeeperDto();
   readers: Reader[] = [];
   bookId:number;
-  book:Book;
+  book:Book = new Book();
 
   constructor(public router: Router, private route: ActivatedRoute, private bookService: BookService,
               private readerService: ReaderService, private bookKeeperService:BookKeeperService) {

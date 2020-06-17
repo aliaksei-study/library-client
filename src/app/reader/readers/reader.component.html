@@ -15,7 +15,7 @@
     <td><input type="checkbox" value="{{reader.id}}" id="{{reader.id}}" (click)="updateClickedCheckboxesList(reader.id, $event)"/> &nbsp;</td>
     <td><a routerLink="/readers/{{reader.id}}">{{reader.name}}</a></td>
     <td>{{reader.surname}}</td>
-    <td>{{reader.bookKeeper?.book?.title}}</td>
+    <td>{{reader.book?.title}}</td>
   </tr>
 </table>
 <hr>
