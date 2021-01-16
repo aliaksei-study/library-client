@@ -8,12 +8,12 @@ import {Reader} from "./reader";
 export class Book {
   id:number;
   title:string;
-  publisher:Publisher;
+  publisher:Publisher = new Publisher();
   publicationDate:Date;
   numberOfCopies:number;
   genre:Genre;
   bookKeeper:BookKeeper;
   reader:Reader;
   authors:Author[] = [];
-  covers:Cover[];
+  covers:Cover[] = [];
 }

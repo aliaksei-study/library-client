@@ -3,10 +3,10 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
-import { BookComponent } from './book/book.component';
+import { BookComponent } from './book/books/book.component';
 import { ReaderComponent } from './reader/readers/reader.component';
 import {Router, RouterModule, Routes} from "@angular/router";
-import { AddBookComponent } from './add-book/add-book.component';
+import { AddBookComponent } from './book/add-book/add-book.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { AddReaderComponent } from './reader/add-reader/add-reader.component';
 import {FormsModule} from "@angular/forms";
@@ -19,8 +19,9 @@ import { UpdateReaderComponent } from './reader/update-reader/update-reader.comp
 import { AuthorComponent } from './author/authors/author.component';
 import { UpdateAuthorComponent } from './author/update-author/update-author.component';
 import { CountriesPipe } from './pipe/countries.pipe';
-import { UpdateBookComponent } from './update-book/update-book.component';
+import { UpdateBookComponent } from './book/update-book/update-book.component';
 import { BookKeeperComponent } from './book-keeper/book-keeper.component';
+import { MailComponent } from './mail/mail.component';
 
 const appRoutes : Routes = [
   {
@@ -71,6 +72,10 @@ const appRoutes : Routes = [
   {
     path:"keeper-give-out/:bookId",
     component:BookKeeperComponent
+  },
+  {
+    path:"mail",
+    component:MailComponent
   }
 ];
 
@@ -90,7 +95,8 @@ const appRoutes : Routes = [
     UpdateAuthorComponent,
     CountriesPipe,
     UpdateBookComponent,
-    BookKeeperComponent
+    BookKeeperComponent,
+    MailComponent
   ],
   imports: [
     BrowserModule,

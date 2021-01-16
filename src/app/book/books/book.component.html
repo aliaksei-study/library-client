@@ -1,12 +1,15 @@
 <h1 class="templateTitle">List of books</h1>
 <div class="input-group">
   <div class="input-group-prepend">
-    <button class="btn btn-outline-secondary" type="button" id="button-addon1">Search</button>
+    <button class="btn btn-outline-secondary" type="button" id="button-addon1" (click)="filterBooks()">Search</button>
   </div>
-  <input type="text" aria-label="First name" placeholder="Title of searching book" class="form-control">
-  <input type="text" aria-label="Last name" placeholder="Name of author" class="form-control">
-  <input type="text" aria-label="Last name" placeholder="Type of genre" class="form-control">
-  <input type="text" aria-label="Last name" placeholder="Year of publication" class="form-control">
+  <input id="titleOfBookInput" type="text" aria-label="Title of book" placeholder="Title of searching book" class="form-control">
+  <input id="nameOfAuthorInput" type="text" aria-label="Name of author" placeholder="Name of author" class="form-control">
+  <input id="yearOfPublicationInput" type="date" aria-label="Year of publication" placeholder="Year of publication" class="form-control">
+  <select id="genre" class="form-control" name="genre">
+    <option value="">Choose genre of book</option>
+    <option *ngFor="let key of genres | genres" value="{{key[1]}}">{{key[1]}}</option>
+  </select>
 </div>
 <div>
   <a routerLink="/books/add" class="href-button-add">Add a book</a>
@@ -15,9 +18,9 @@
 <table id="entity-list">
   <tr>
     <th></th>
-    <th>Name of the book</th>
+    <th (click)="sortBooks(sortByName)">Name of the book</th>
     <th>Authors of the book</th>
-    <th>Publication date</th>
+    <th (click)="sortBooks(sortByPublicationDate)">Publication date</th>
     <th>Publisher's address</th>
     <th>Reader's name and surname</th>
     <th>Action with book</th>

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ReaderService} from "../../service/reader.service";
 import {Reader} from "../../model/reader";
 import {Book} from "../../model/book";
+import {Author} from "../../model/author";
 
 @Component({
   selector: 'app-reader',
@@ -11,6 +12,7 @@ import {Book} from "../../model/book";
 export class ReaderComponent implements OnInit {
   readers: Reader[] = [];
   pages: Array<number>;
+  selectedReaders:Reader[] = [];
   checkBoxesList: Array<number> = [];
   currentPage: number = 0;
   sizeOfPage: number = 2;
@@ -18,10 +20,10 @@ export class ReaderComponent implements OnInit {
   constructor(private readerService: ReaderService) {
     setTimeout(() => {
       this.setClickedCheckBoxes();
-    }, 500);
+    }, 700);
     setTimeout(() => {
       this.getReadingBooks();
-    }, 500);
+    }, 700);
   }
 
   ngOnInit(): void {
@@ -37,18 +39,21 @@ export class ReaderComponent implements OnInit {
   }
 
   public getReadingBooks() {
-    this.readerService.getReadingBooks(this.createArrayFromReaderIds()).subscribe(
-      data => {
-        for (let i = 0; i < data.length; i++) {
-          let reader = this.readers[i];
-          reader.book = new Book();
-          reader.book.title = data[i];
+    let readerIds = this.createArrayFromReaderIds();
+    if(readerIds.length !== 0) {
+      this.readerService.getReadingBooks(readerIds).subscribe(
+        data => {
+          for (let i = 0; i < data.length; i++) {
+            let reader = this.readers[i];
+            reader.book = new Book();
+            reader.book.title = data[i];
+          }
+        },
+        err => {
+          console.log(err);
         }
-      },
-      err => {
-        console.log(err);
-      }
-    );
+      );
+    }
   }
 
   public setPage(indexOfPage: number, event: any) {
@@ -87,11 +92,13 @@ export class ReaderComponent implements OnInit {
   public updateClickedCheckboxesList(id: number, event): void {
     if (event.target.checked) {
       this.checkBoxesList.push(id);
+      this.setSelectedReader(id);
     } else {
       let deletedIndex;
       deletedIndex = this.checkBoxesList.indexOf(id);
       if (deletedIndex != -1) {
         this.checkBoxesList.splice(deletedIndex, 1);
+        this.removeSelectedReader(id);
       }
     }
   }
@@ -110,4 +117,19 @@ export class ReaderComponent implements OnInit {
       alert("You didn't choose any reader. Please select one reader and try again");
     }
   }
+
+  setSelectedReader(readerId: number) {
+      let selectedReader = this.readers.find(function (reader: Reader) {
+        return reader.id == readerId;
+      });
+      this.selectedReaders.push(selectedReader);
+  }
+
+  removeSelectedReader(readerId:number) {
+    let selectedReader = this.selectedReaders.find(function (reader: Reader) {
+      return reader.id == readerId;
+    });
+    this.selectedReaders.splice(this.selectedReaders.indexOf(selectedReader), 1);
+  }
 }
+

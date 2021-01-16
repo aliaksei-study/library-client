@@ -1,8 +1,8 @@
 <h1 class="templateTitle">List of readers</h1>
 <div>
   <a routerLink="/readers/add" class="href-button-add">Add a reader</a>
-  <button class="small-button">Send an email</button>
-  <button class="small-button" (click)="deleteReaders()">Remove selected readers</button>
+  <a routerLink="/mail" [state]="{data: selectedReaders}" class="href-button-add ml-3">Send an email</a>
+  <button class="small-button pull-right" (click)="deleteReaders()">Remove selected readers</button>
 </div>
 <table id="entity-list">
   <tr>

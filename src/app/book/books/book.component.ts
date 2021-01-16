@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {Book} from "../model/book";
-import {BookService} from "../service/book.service";
-import {URLHelper} from "../util/urlhelper";
+import {Book} from "../../model/book";
+import {BookService} from "../../service/book.service";
+import {URLHelper} from "../../util/urlhelper";
 import {HttpClient} from "@angular/common/http";
-import {BookKeeperService} from "../service/book-keeper.service";
+import {BookKeeperService} from "../../service/book-keeper.service";
+import {Genre} from "../../model/genre.enum";
 
 @Component({
   selector: 'app-book',
@@ -16,6 +17,9 @@ export class BookComponent implements OnInit {
   checkBoxesList: Array<number> = [];
   currentPage:number = 0;
   sizeOfPage: number = 3;
+  genres: Array<String> = new Array<String>();
+  sortByName: string = "title";
+  sortByPublicationDate: string = "publicationDate";
 
   constructor(private bookService: BookService, private bookKeeperService:BookKeeperService) {
     setTimeout(() => {
@@ -25,6 +29,9 @@ export class BookComponent implements OnInit {
 
   ngOnInit() {
     this.getBookPage(this.currentPage, this.sizeOfPage);
+    for(let key in Genre) {
+      this.genres.push(key);
+    }
   }
 
   public setPage(indexOfPage: number, event:any) {
@@ -57,8 +64,8 @@ export class BookComponent implements OnInit {
     }
   }
 
-  public  getBookPage(page: number, pageSize:number) {
-    this.bookService.getBookPage(page, pageSize).subscribe(
+  public  getBookPage(page: number, pageSize:number, filter?: string, sort?: string) {
+    this.bookService.getBookPage(page, pageSize, filter, sort).subscribe(
      res => {
          this.books = res['content'];
        this.pages = new Array(res['totalPages']);
@@ -78,5 +85,33 @@ export class BookComponent implements OnInit {
         console.log(err);
       }
     )
+  }
+
+  filterBooks() {
+    let filter: string = "";
+    let titleOfBook = (document.getElementById("titleOfBookInput") as HTMLInputElement).value;
+    let nameOfAuthor = (document.getElementById("nameOfAuthorInput") as HTMLInputElement).value;
+    let yearOfPublication = (document.getElementById("yearOfPublicationInput") as HTMLInputElement).value;
+    let genre = (document.getElementById("genre") as HTMLInputElement).value;
+    if(titleOfBook !== "") {
+      filter = filter.concat("title:" + titleOfBook + ",");
+    }
+    if(nameOfAuthor !== "") {
+      filter = filter.concat("name:" + nameOfAuthor + ",");
+    }
+    if(yearOfPublication !== "") {
+      filter = filter.concat("publicationDate:" + yearOfPublication + ",");
+    }
+    if(genre !== "") {
+      filter = filter.concat("genre:" + genre + ",")
+    }
+    if(filter.endsWith(",")) {
+      filter = filter.substr(0, filter.length - 1)
+    }
+    this.getBookPage(0, 214730, filter);
+  }
+
+  sortBooks(field: string) {
+    this.getBookPage(0, 214730, undefined, field);
   }
 }

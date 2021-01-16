@@ -9,5 +9,8 @@ export class URLHelper {
   static readonly AUTHORS_URL = `${URLHelper.BASE_URL}\\authors`;
   static readonly AUTHOR_PAGE_URL = `${URLHelper.BASE_URL}\\authors?page=`;
   static readonly BOOK_KEEPER = `${URLHelper.BASE_URL}\\book-keeper`;
-  static readonly READING_BOOK_URL = `${URLHelper.BASE_URL}\\books\\readers`
+  static readonly READING_BOOK_URL = `${URLHelper.BASE_URL}\\books\\readers`;
+  static readonly MAIL_URL = `${URLHelper.BASE_URL}\\mail`;
+  static readonly MAIL_GET_RANDOM_TEMPLATE = `${URLHelper.MAIL_URL}\\templates\\random-template`;
+  static readonly MAIL_TEMPLATES = `${URLHelper.MAIL_URL}\\templates`;
 }

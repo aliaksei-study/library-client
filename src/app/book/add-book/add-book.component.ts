@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
-import {BookDto} from "../dto/book-dto";
-import {Genre} from "../model/genre.enum";
-import {Country} from "../model/country.enum";
-import {Author} from "../model/author";
-import {AuthorService} from "../service/author.service";
-import {CoverDto} from "../dto/cover-dto";
-import {BookService} from "../service/book.service";
+import {BookDto} from "../../dto/book-dto";
+import {Genre} from "../../model/genre.enum";
+import {Country} from "../../model/country.enum";
+import {Author} from "../../model/author";
+import {AuthorService} from "../../service/author.service";
+import {CoverDto} from "../../dto/cover-dto";
+import {BookService} from "../../service/book.service";
 
 @Component({
   selector: 'app-add-book',

@@ -1,0 +1,92 @@
+h2 {
+  text-align: center;
+  margin-top:3%;
+  font-style: italic;
+  font-size: 30px;
+}
+
+h3{
+  text-align: center;
+  font-style: italic;
+  font-size: 30px;
+}
+
+h5 {
+  color: red;
+  font-size: 16px;
+}
+
+.invalid-input {
+  color:red;
+}
+
+table {
+  width:100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 15px;
+  text-align: center;
+}
+table#entity-list tr:nth-child(even) {
+  background-color: #eee;
+}
+table#entity-list tr:nth-child(odd) {
+  background-color: #fff;
+}
+table#entity-list th {
+  background-color: #5d5785;
+  color: white;
+}
+
+div > a {
+  margin-right:75%;
+  margin-bottom: 1%;
+}
+
+.href-button-add {
+  display: inline-block;
+  color: gray;
+  font-weight: 700;
+  text-decoration: none;
+  user-select: none;
+  padding: 5px 20px;
+  outline: none;
+  border: 2px solid;
+  border-radius: 1px;
+  transition: 0.2s;
+}
+.href-button-add:hover {
+  background: gray;
+  color:green;
+}
+.href-button-add:active {
+  background: dimgray;
+  color:green;
+}
+
+.small-button {
+  color : gray;
+  background: white;
+  font-weight: 700;
+  padding: 6px 20px;
+  border: 2px solid;
+  border-radius: 1px;
+  transition: 0.2s;
+  outline:none;
+}
+
+.small-button:hover {
+  background: gray;
+  color:red;
+}
+
+.small-button:active {
+  background: dimgray;
+  color:red;
+}
